@@ -184,8 +184,6 @@ int main(void)
               HAL_GPIO_WritePin(f_GPIO_Port, f_Pin, GPIO_PIN_RESET);
               HAL_GPIO_WritePin(g_GPIO_Port, g_Pin, GPIO_PIN_RESET);
               break;
-      }
-  }
   while (1)
   {
 	   if(counter >= 0 && counter < 5){
