@@ -218,7 +218,7 @@ int main(void)
 	    }
 
 	        //2 phía còn lại
-	 	   if(counter >= 6 && counter <= 9){
+	 	   if(counter >= 6 || counter <= 9){
 	 	        HAL_GPIO_WritePin(S_RED_LED_GPIO_Port, S_RED_LED_Pin, GPIO_PIN_SET);
 	 	        HAL_GPIO_WritePin(S_YELLOW_LED_GPIO_Port, S_YELLOW_LED_Pin, GPIO_PIN_SET);
 	 	        HAL_GPIO_WritePin(S_GREEN_LED_GPIO_Port, S_GREEN_LED_Pin, GPIO_PIN_RESET);
