@@ -88,9 +88,6 @@ void clearALLClock(){
 void setNumberOnClock(int num){
 	HAL_GPIO_WritePin(LED_PORT[num], LED_PIN[num], GPIO_PIN_RESET);
 }
-void clearNumberOnClock(int num){
-	HAL_GPIO_WritePin(LED_PORT[num], LED_PIN[num], GPIO_PIN_SET);
-}
 int main(void)
 {
   /* USER CODE BEGIN 1 */
