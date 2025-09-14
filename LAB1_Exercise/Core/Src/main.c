@@ -121,25 +121,44 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int counter=0;
-  int prev_index=-1;
+  int second=0;
+  int minute=0;
+  int hour=0;
+  int prev_second=-1;
+  int prev_minute=-1;
+  int prev_hour=-1;
   clearALLClock();
 
   while (1)
   {
-	  int index=counter/5;
-	  if (prev_index!=index)
-	  {
-		  if (prev_index>=0)
-		  {
-			  HAL_GPIO_WritePin(LED_PORT[prev_index], LED_PIN[prev_index], GPIO_PIN_SET);
-		  }
-		  HAL_GPIO_WritePin(LED_PORT[index], LED_PIN[index], GPIO_PIN_RESET);
-		  prev_index=index;
+	  if (prev_second >= 0 && (prev_second/5 != second/5)) {
+	      clearNumberOnClock(prev_second/5);
 	  }
-	  counter++;
-	  if (counter==60) counter=0;
-	  HAL_Delay(1000);
+	  setNumberOnClock(second/5);
+	  prev_second = second;
+	  if (prev_minute >= 0 && (prev_minute/5 != minute/5)) {
+	      clearNumberOnClock(prev_minute/5);
+	  }
+	  setNumberOnClock(minute/5);
+	  prev_minute = minute;
+	  if (prev_hour >= 0 && (prev_hour%12 != hour%12)){
+		  clearNumberOnClock(prev_hour%12);
+		  }
+		  setNumberOnClock(hour%12);
+		  prev_hour=hour;
+	  second++;
+	  if (second==60){
+		  minute++;
+		  second=0;
+	  }
+	  if (minute==60){
+		  hour++;
+		  minute=0;
+	  }
+	  if (hour==24){
+		  hour=0;
+	  }
+	  HAL_Delay(50);
   }
   /* USER CODE END 3 */
 }
@@ -194,23 +213,18 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, LED_0_Pin|LED_1_Pin|LED_2_Pin|LED_3_Pin
                           |LED_4_Pin|LED_5_Pin|LED_6_Pin|LED_7_Pin
-                          |LED_8_Pin|LED_9_Pin|LED_10_Pin, GPIO_PIN_RESET);
+                          |LED_8_Pin|LED_9_Pin|LED_11_Pin|LED_10_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : LED_0_Pin LED_1_Pin LED_2_Pin LED_3_Pin
                            LED_4_Pin LED_5_Pin LED_6_Pin LED_7_Pin
-                           LED_8_Pin LED_9_Pin LED_10_Pin */
+                           LED_8_Pin LED_9_Pin LED_11_Pin LED_10_Pin */
   GPIO_InitStruct.Pin = LED_0_Pin|LED_1_Pin|LED_2_Pin|LED_3_Pin
                           |LED_4_Pin|LED_5_Pin|LED_6_Pin|LED_7_Pin
-                          |LED_8_Pin|LED_9_Pin|LED_10_Pin;
+                          |LED_8_Pin|LED_9_Pin|LED_11_Pin|LED_10_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : LED_11_Pin */
-  GPIO_InitStruct.Pin = LED_11_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-  HAL_GPIO_Init(LED_11_GPIO_Port, &GPIO_InitStruct);
 
 }
 
@@ -241,7 +255,7 @@ void Error_Handler(void)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t *file	, uint32_t line)
+void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,

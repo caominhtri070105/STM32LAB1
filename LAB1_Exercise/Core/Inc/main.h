@@ -78,10 +78,10 @@ void Error_Handler(void);
 #define LED_8_GPIO_Port GPIOA
 #define LED_9_Pin GPIO_PIN_13
 #define LED_9_GPIO_Port GPIOA
-#define LED_11_Pin GPIO_PIN_14
-#define LED_11_GPIO_Port GPIOA
-#define LED_10_Pin GPIO_PIN_15
+#define LED_10_Pin GPIO_PIN_14
 #define LED_10_GPIO_Port GPIOA
+#define LED_11_Pin GPIO_PIN_15
+#define LED_11_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
