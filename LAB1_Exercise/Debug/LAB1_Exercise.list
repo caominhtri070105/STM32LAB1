@@ -429,12 +429,11 @@ int main(void)
  80003be:	2300      	movs	r3, #0
  80003c0:	60fb      	str	r3, [r7, #12]
 	  }
-	  HAL_Delay(50);
- 80003c2:	2032      	movs	r0, #50	; 0x32
- 80003c4:	f000 f964 	bl	8000690 <HAL_Delay>
+	  HAL_Delay(1000);
+ 80003c2:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+ 80003c6:	f000 f963 	bl	8000690 <HAL_Delay>
 	  if (prev_second >= 0 && (prev_second/5 != second/5)) {
- 80003c8:	e754      	b.n	8000274 <main+0x34>
- 80003ca:	bf00      	nop
+ 80003ca:	e753      	b.n	8000274 <main+0x34>
  80003cc:	66666667 	.word	0x66666667
  80003d0:	2aaaaaab 	.word	0x2aaaaaab
 
